@@ -79,3 +79,36 @@ function majorityOfElement():  void{
   console.log(`Majority of the element is ${majorityElement}`);
 }
 // majorityOfElement();
+
+//count Alpha Digit Spl
+// interface CharacterCounts {
+//   alpha:number;
+//   digit:number;
+//   spl:number;
+// }
+function countAlphaDigitSpl(): void{
+  const str: string = "An@and@a123wipro";
+  let alpha:number = 0;
+  let digit:number = 0;
+  let spl: number = 0;
+
+  for( let i:number = 0;i<str.length;i++){
+    const ch:string = str.charAt(i);
+    if(/[a-zA-z]/.test(ch)){
+      alpha ++;
+    } else if(/[0-9]/.test(ch)){
+      digit ++;
+    } else{
+      spl ++;
+    }
+  }
+  // return {alpha,digit,spl};
+  console.log(`Character count ${alpha}`);
+  console.log(`Digit count ${digit}`);
+  console.log(`Special charcater count ${spl}`);
+}
+// const counts: CharacterCounts = countAlphaDigitSpl();
+// console.log(`Character count ${counts.alpha}`);
+// console.log(`Digit count ${counts.digit}`);
+// console.log(`Special charcater count ${counts.spl}`);
+countAlphaDigitSpl();

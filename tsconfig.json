@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "target": "es5", // Keep the old target
+    "downlevelIteration": true, // Add this flag
+    // ... other options
+  }
+}

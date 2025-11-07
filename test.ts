@@ -73,6 +73,7 @@ function majorityOfElement():  void{
   const a: number[] = [3,2,3,3,4];
   const n:number =  a.length;
   const elementCounts = new Map<number, number>();
+
   for(const element of a){
     const currentCount: number = elementCounts.get(element) || 0;
     elementCounts.set(element,currentCount+1);
@@ -82,12 +83,13 @@ function majorityOfElement():  void{
    let majorityElement: number | undefined;
 
   // Iterate over the Map entries [key, value]
-  for (const [key, count] of elementCounts) {
-    if (count > maxCount) {
+    elementCounts.forEach((count,key)=>{
+ if (count > maxCount) {
       maxCount = count;
       majorityElement = key;
     }
-  }
+  })
+
   console.log(`Majority of the element is ${majorityElement}`);
 }
 // majorityOfElement();
@@ -124,3 +126,21 @@ function countAlphaDigitSpl(): void{
 // console.log(`Digit count ${counts.digit}`);
 // console.log(`Special charcater count ${counts.spl}`);
 countAlphaDigitSpl();
+
+function countStringChar(str: string) {
+   str = str.toLowerCase();
+    const map = new Map<String, number>();
+    const chs: string[] = str.split('');
+    for(const c of chs) {
+      if(map.has(c)){
+          map.set(c, map.get(c)+1);
+      } else {
+        map.set(c,1);
+      }
+    }
+    map.forEach((key, count) =>{
+      console.log(key, count);
+    })
+    
+}
+countStringChar('Bangalore');

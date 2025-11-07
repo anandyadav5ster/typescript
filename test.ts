@@ -45,6 +45,18 @@ function reverseString(str: string): string{
   return revString;
 }
 
+
+function reverseStringMethodOne(str: string) {
+    const charArray: string[] = str.split('');
+    let revString: string = '';
+    for( const ch of charArray) {
+        revString =ch+ revString;
+    }
+    console.log(revString);
+}
+
+reverseString('Bangalore');
+
 // const revStr: string = reverseString('Bangalore');
 // console.log(revStr);
 

@@ -125,7 +125,7 @@ function countAlphaDigitSpl(): void{
 // console.log(`Character count ${counts.alpha}`);
 // console.log(`Digit count ${counts.digit}`);
 // console.log(`Special charcater count ${counts.spl}`);
-countAlphaDigitSpl();
+// countAlphaDigitSpl();
 
 function countStringChar(str: string) {
    str = str.toLowerCase();
@@ -143,4 +143,39 @@ function countStringChar(str: string) {
     })
     
 }
-countStringChar('Bangalore');
+// countStringChar('Bangalore');
+
+// count first non repeat number
+
+function countNonRepeatNum(arr : number[]): number|null {
+  const count = new Map<number,number>();
+  for(const num of arr){
+    count.set(num, (count.get(num)||0)+1);
+  }
+  for(const num of arr ){
+    if(count.get(num)===1){
+      return num;
+    }
+  }
+  return null;
+}
+
+const numList =  [4, 5, 1, 2, 0, 4];
+// console.log(countNonRepeatNum(numList));
+
+// count the first non repeating char
+function nonRepeatingGenricMethod<T>(arr:T[]):T|null {
+  const count = new Map<T,number>();
+
+  for(const item of arr){
+    count.set(item, (count.get(item)||0)+1);
+  }
+  for(const item of arr){
+    if(count.get(item)===1) return item;
+  }
+
+  return null;
+}
+const str: string = "Bangalore";
+const words: string[] = str.split('');
+console.log(nonRepeatingGenricMethod(words));

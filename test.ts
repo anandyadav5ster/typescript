@@ -205,3 +205,21 @@ function removeDuplicateFromItem<T extends string | number>(item: T): T {
 }
 console.log(removeDuplicateFromItem('programming'));
 console.log(removeDuplicateFromItem(12342));
+/*=================================================*/
+function countFrequence<T extends string | number>(item:T): Map<string,number>{
+    const str = item.toString().toLowerCase();
+    const count = new Map<string,number>();
+    for(const char of str){
+       count.set(char,(count.get(char)|0)+1);
+    }
+    // console.log(count);
+    count.forEach((key,value) =>{
+        console.log(key,value);
+    })
+    return count;
+}
+
+const city = 'BBangalore';
+const trainNumber = 12341;
+// countFrequence(city);
+countFrequence(trainNumber);

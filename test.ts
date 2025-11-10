@@ -195,4 +195,13 @@ function reversStringNumber<T extends string | number>(item:T): T{
     
 }
 const item = 'Anand';
-console.log(reversStringNumber(item));
+// console.log(reversStringNumber(item));
+
+// remove duplicates from the string or number
+function removeDuplicateFromItem<T extends string | number>(item: T): T {
+  const str = item.toString();
+  const result = [...new Set(str)].join('');
+  return (item ==='number'?Number(result): result) as T;
+}
+console.log(removeDuplicateFromItem('programming'));
+console.log(removeDuplicateFromItem(12342));

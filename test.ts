@@ -181,6 +181,13 @@ const words: string[] = str.split('');
 console.log(nonRepeatingGenricMethod(words));
 
 // reverse String and number using same method
+/*
+Explanation
+T extends string | number → allows both strings and numbers.
+item.toString() → converts number to string so we can reverse it.
+.split('').reverse().join('') → reverses the string.
+If original input was a number, convert the reversed string back using Number().
+*/
 function reversStringNumber<T extends string | number>(item:T): T{
     const str = item.toString();
     const reverseItem = str.split('').reverse().join('');

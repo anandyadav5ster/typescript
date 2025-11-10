@@ -267,3 +267,14 @@ function removeGivenChar<T extends string|number>(item:T, toRemove:T): T{
   return(item==='number'?Number(output):output) as T;
 }
 console.log(removeGivenChar('madam','m'));
+
+/*=========reverse specfic words================*/
+function reverseWord<T extends string | number>(item:T, target:T) {
+    const str = item.toString().toLowerCase();
+    const tar = target.toString().toLowerCase();
+    const targetRev = tar.split('').reverse().join('');
+    const output = str.replace(tar,targetRev);
+    console.log(output);
+}
+
+reverseWord('Anand is from bangalore','bangalore');

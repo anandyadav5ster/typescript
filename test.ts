@@ -179,3 +179,13 @@ function nonRepeatingGenricMethod<T>(arr:T[]):T|null {
 const str: string = "Bangalore";
 const words: string[] = str.split('');
 console.log(nonRepeatingGenricMethod(words));
+
+// reverse String and number using same method
+function reversStringNumber<T extends string | number>(item:T): T{
+    const str = item.toString();
+    const reverseItem = str.split('').reverse().join('');
+    return (typeof item==='number'? Number(reverseItem):reverseItem) as T;
+    
+}
+const item = 'Anand';
+console.log(reversStringNumber(item));

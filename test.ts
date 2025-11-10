@@ -203,8 +203,8 @@ function removeDuplicateFromItem<T extends string | number>(item: T): T {
   const result = [...new Set(str)].join('');
   return (item ==='number'?Number(result): result) as T;
 }
-console.log(removeDuplicateFromItem('programming'));
-console.log(removeDuplicateFromItem(12342));
+// console.log(removeDuplicateFromItem('programming'));
+// console.log(removeDuplicateFromItem(12342));
 /*=================================================*/
 function countFrequence<T extends string | number>(item:T): Map<string,number>{
     const str = item.toString().toLowerCase();
@@ -235,4 +235,35 @@ function countDuplicates<T extends string | number>(item: T){
   });
 }
 const busNumber = 12341;
-countDuplicates(busNumber);
+// countDuplicates(busNumber);
+/*===========count max character=========================*/
+function countDuplicatesItems<T extends string | number>(item:T){
+    const str = item.toString().toLowerCase();
+    const count = new Map<string,number>();
+    for(const char of str){
+           count.set(char,(count.get(char)||0)+1);
+    }
+    
+   let maxChar='';
+   let maxCount=0;
+    
+    count.forEach((freq,char) =>{
+        if(freq > maxCount){
+      maxCount = freq;
+      maxChar = char;
+        }
+    console.log(char,freq);
+    })
+  console.log(`Highest occurred character: '${maxChar}' → ${maxCount} times`);
+}
+
+const chars = 'aaaaabbbccc';
+// countDuplicatesItems(chars);
+/* =========remove given item=====================*/
+function removeGivenChar<T extends string|number>(item:T, toRemove:T): T{
+  const str = item.toString().toLowerCase();
+  const remove = toRemove.toString().toLowerCase();
+  const output = str.split(remove).join('');
+  return(item==='number'?Number(output):output) as T;
+}
+console.log(removeGivenChar('madam','m'));

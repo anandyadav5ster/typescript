@@ -263,4 +263,11 @@ function reverseWord(item, target) {
     var output = str.replace(tar, targetRev);
     console.log(output);
 }
-reverseWord('Anand is from bangalore', 'bangalore');
+// reverseWord('Anand is from bangalore','bangalore');
+function countDigit(str) {
+    var digit = str.match(/\d/g);
+    var countDigit = digit ? digit.length : 0;
+    console.log(countDigit);
+}
+var cityName = "456Delhi123";
+countDigit(cityName);

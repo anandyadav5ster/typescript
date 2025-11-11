@@ -277,4 +277,11 @@ function reverseWord<T extends string | number>(item:T, target:T) {
     console.log(output);
 }
 
-reverseWord('Anand is from bangalore','bangalore');
+// reverseWord('Anand is from bangalore','bangalore');
+function countDigit(str: string){
+    const digit = str.match(/\d/g);
+    const countDigit = digit?digit.length:0;
+    console.log(countDigit);
+}
+const cityName: string = "456Delhi123";
+countDigit(cityName);

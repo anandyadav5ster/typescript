@@ -285,3 +285,31 @@ function countDigit(str: string){
 }
 const cityName: string = "456Delhi123";
 countDigit(cityName);
+
+function fetchInteger<T extends string | number>(item:T){
+    const a = "Automation Testing  Record#1234";
+    const output = a.match(/\d+/)[0];
+    console.log(output);
+}
+const nameex = "Automation Testing  Record#1234";
+fetchInteger(nameex);
+
+// const item:[] = {'abc21','cde23','def26'};
+function getSum(){
+    const item:string[] = ['abc21','cde23','def26'];
+    let total:number = 0;
+    for(const str of item){
+        const digit = str.replace(/[a-zA-Z]/g,"");
+        total = total+Number(digit);
+    }
+    console.log(total);
+}
+getSum();
+// Automation Testing  Record#1234
+function getDigit() {
+    const str:string = 'Automation Testing  Record#1234';
+    const digit: string = str.replace(/[a-zA-Z]/g,"");
+    const output:number = Number(digit.replace('#',""));
+    console.log(output);
+}
+getDigit();

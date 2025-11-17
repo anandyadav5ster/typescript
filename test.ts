@@ -313,3 +313,23 @@ function getDigit() {
     console.log(output);
 }
 getDigit();
+
+function shiftNegativePositiveItems() {
+    const a :number[] = [1,2,-1,3,-2,-3,4];
+    let left:number = 0;
+    let right:number = a.length-1;
+    while(left<right){
+        if(a[left]<0){
+            left++
+        } else if(a[right]>=0){
+            right--;
+        } else{
+            [a[left],a[right]]=[a[right],a[left]];
+            // [a[right],a[left]]=[a[left],a[right]];
+            left++;
+            right--;
+        }
+    }
+    console.log(`Result is ${a}`);
+}
+shiftNegativePositiveItems();

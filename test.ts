@@ -343,3 +343,18 @@ function countDigitChatSpl(){
     const spl = str.match(/[^a-zA-Z0-9]/g).join('');
     console.log(`${spl} and length is ${spl.length}`);
 }
+function func1(){
+   const str: string = "Anand123john123";
+   let sum:number = 0;
+   let matches = str.match(/[0-9]/g);
+      if(matches){
+          for( const d of matches){
+               sum = sum+ Number(d);
+          }
+         
+      }
+   
+   console.log(sum);
+}
+
+func1()

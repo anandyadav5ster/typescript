@@ -333,3 +333,13 @@ function shiftNegativePositiveItems() {
     console.log(`Result is ${a}`);
 }
 shiftNegativePositiveItems();
+
+function countDigitChatSpl(){
+    const str : string = 'Bangalore@@1234';
+    const digit = str.match(/[a-zA-Z]/g).join('');
+    console.log(`${digit} and length is ${digit.length}`);
+    const nums = str.match(/[0-9]/g).join('');
+    console.log(`${nums} and length is ${nums.length}`);
+    const spl = str.match(/[^a-zA-Z0-9]/g).join('');
+    console.log(`${spl} and length is ${spl.length}`);
+}

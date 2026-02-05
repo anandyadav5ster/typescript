@@ -1,3 +1,26 @@
+// check 
+function palindrome(){
+  
+    const x = -121;
+    if(x<0 || x ==0 || x<99){
+      return false;
+    }
+    let temp = x;
+    let sum = 0;
+    while(temp>0){
+        let digit = temp%10;
+        sum = sum*10 + digit;
+        temp = Math.floor(temp/10);
+    }
+    if(sum === x){
+      return true;
+    }
+}
+
+palindrome();
+
+
+
 // rotate left Array
 
 function rotateArray(arr: number[], d: number): number[]{

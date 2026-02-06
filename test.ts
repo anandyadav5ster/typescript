@@ -1,3 +1,57 @@
+check execution flow
+function test1() {
+    console.log('test');
+}
+
+console.log('start');
+
+setTimeout(() => {
+    console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log('promise');
+});
+
+test1();
+
+console.log('end');
+
+
+//  start, test, end, promise, timeout
+
+function test() {
+    console.log('test');
+}
+
+async function runSequence() {
+    console.log('start');
+
+    setTimeout(() => {
+        console.log('setTimeout');
+    }, 0);
+
+    // Execution PAUSES here for the remainder of this function
+    await Promise.resolve().then(() => {
+        console.log('promise');
+    });
+
+    test();
+    console.log('end');
+}
+
+runSequence();
+console.log('global sync');
+/*
+start
+global sync
+promise
+test
+end
+setTimeout
+*/
+
+
 // check 
 function palindrome(){
   

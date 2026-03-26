@@ -1,0 +1,14 @@
+Type: It is used to define the new name of the a type
+ type AliasName = Type;
+ 
+type Person={
+  name:string,
+  age: number
+}
+
+interface : It is used to define the shape of the object.
+
+interface Person {
+   name: string;
+   age: number;
+}

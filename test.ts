@@ -1,3 +1,80 @@
+check execution flow
+function test1() {
+    console.log('test');
+}
+
+console.log('start');
+
+setTimeout(() => {
+    console.log('setTimeout');
+}, 0);
+
+Promise.resolve().then(() => {
+    console.log('promise');
+});
+
+test1();
+
+console.log('end');
+
+
+//  start, test, end, promise, timeout
+
+function test() {
+    console.log('test');
+}
+
+async function runSequence() {
+    console.log('start');
+
+    setTimeout(() => {
+        console.log('setTimeout');
+    }, 0);
+
+    // Execution PAUSES here for the remainder of this function
+    await Promise.resolve().then(() => {
+        console.log('promise');
+    });
+
+    test();
+    console.log('end');
+}
+
+runSequence();
+console.log('global sync');
+/*
+start
+global sync
+promise
+test
+end
+setTimeout
+*/
+
+
+// check 
+function palindrome(){
+  
+    const x = -121;
+    if(x<0 || x ==0 || x<99){
+      return false;
+    }
+    let temp = x;
+    let sum = 0;
+    while(temp>0){
+        let digit = temp%10;
+        sum = sum*10 + digit;
+        temp = Math.floor(temp/10);
+    }
+    if(sum === x){
+      return true;
+    }
+}
+
+palindrome();
+
+
+
 // rotate left Array
 
 function rotateArray(arr: number[], d: number): number[]{
@@ -45,6 +122,18 @@ function reverseString(str: string): string{
   return revString;
 }
 
+
+function reverseStringMethodOne(str: string) {
+    const charArray: string[] = str.split('');
+    let revString: string = '';
+    for( const ch of charArray) {
+        revString =ch+ revString;
+    }
+    console.log(revString);
+}
+
+reverseString('Bangalore');
+
 // const revStr: string = reverseString('Bangalore');
 // console.log(revStr);
 
@@ -61,6 +150,7 @@ function majorityOfElement():  void{
   const a: number[] = [3,2,3,3,4];
   const n:number =  a.length;
   const elementCounts = new Map<number, number>();
+
   for(const element of a){
     const currentCount: number = elementCounts.get(element) || 0;
     elementCounts.set(element,currentCount+1);
@@ -70,12 +160,13 @@ function majorityOfElement():  void{
    let majorityElement: number | undefined;
 
   // Iterate over the Map entries [key, value]
-  for (const [key, count] of elementCounts) {
-    if (count > maxCount) {
+    elementCounts.forEach((count,key)=>{
+ if (count > maxCount) {
       maxCount = count;
       majorityElement = key;
     }
-  }
+  })
+
   console.log(`Majority of the element is ${majorityElement}`);
 }
 // majorityOfElement();
@@ -111,4 +202,236 @@ function countAlphaDigitSpl(): void{
 // console.log(`Character count ${counts.alpha}`);
 // console.log(`Digit count ${counts.digit}`);
 // console.log(`Special charcater count ${counts.spl}`);
-countAlphaDigitSpl();
+// countAlphaDigitSpl();
+
+function countStringChar(str: string) {
+   str = str.toLowerCase();
+    const map = new Map<String, number>();
+    const chs: string[] = str.split('');
+    for(const c of chs) {
+      if(map.has(c)){
+          map.set(c, map.get(c)+1);
+      } else {
+        map.set(c,1);
+      }
+    }
+    map.forEach((key, count) =>{
+      console.log(key, count);
+    })
+    
+}
+// countStringChar('Bangalore');
+
+// count first non repeat number
+
+function countNonRepeatNum(arr : number[]): number|null {
+  const count = new Map<number,number>();
+  for(const num of arr){
+    count.set(num, (count.get(num)||0)+1);
+  }
+  for(const num of arr ){
+    if(count.get(num)===1){
+      return num;
+    }
+  }
+  return null;
+}
+
+const numList =  [4, 5, 1, 2, 0, 4];
+// console.log(countNonRepeatNum(numList));
+
+// count the first non repeating char
+function nonRepeatingGenricMethod<T>(arr:T[]):T|null {
+  const count = new Map<T,number>();
+
+  for(const item of arr){
+    count.set(item, (count.get(item)||0)+1);
+  }
+  for(const item of arr){
+    if(count.get(item)===1) return item;
+  }
+
+  return null;
+}
+const str: string = "Bangalore";
+const words: string[] = str.split('');
+console.log(nonRepeatingGenricMethod(words));
+
+// reverse String and number using same method
+/*
+Explanation
+T extends string | number → allows both strings and numbers.
+item.toString() → converts number to string so we can reverse it.
+.split('').reverse().join('') → reverses the string.
+If original input was a number, convert the reversed string back using Number().
+*/
+function reversStringNumber<T extends string | number>(item:T): T{
+    const str = item.toString();
+    const reverseItem = str.split('').reverse().join('');
+    return (typeof item==='number'? Number(reverseItem):reverseItem) as T;
+    
+}
+const item = 'Anand';
+// console.log(reversStringNumber(item));
+
+// remove duplicates from the string or number
+function removeDuplicateFromItem<T extends string | number>(item: T): T {
+  const str = item.toString();
+  const result = [...new Set(str)].join('');
+  return (item ==='number'?Number(result): result) as T;
+}
+// console.log(removeDuplicateFromItem('programming'));
+// console.log(removeDuplicateFromItem(12342));
+/*=================================================*/
+function countFrequence<T extends string | number>(item:T): Map<string,number>{
+    const str = item.toString().toLowerCase();
+    const count = new Map<string,number>();
+    for(const char of str){
+       count.set(char,(count.get(char)|0)+1);
+    }
+    // console.log(count);
+    count.forEach((key,value) =>{
+        console.log(key,value);
+    })
+    return count;
+}
+
+const city = 'BBangalore';
+const trainNumber = 12341;
+// countFrequence(city);
+// countFrequence(trainNumber);
+/*=================count duplicates===============================*/
+function countDuplicates<T extends string | number>(item: T){
+  const str = item.toString().toLowerCase();
+  const map = new Map<string,number>();
+  for(const char of str){
+    map.set(char,(map.get(char)||0)+1);
+  }
+  map.forEach((value,key) =>{
+    console.log(key,value);
+  });
+}
+const busNumber = 12341;
+// countDuplicates(busNumber);
+/*===========count max character=========================*/
+function countDuplicatesItems<T extends string | number>(item:T){
+    const str = item.toString().toLowerCase();
+    const count = new Map<string,number>();
+    for(const char of str){
+           count.set(char,(count.get(char)||0)+1);
+    }
+    
+   let maxChar='';
+   let maxCount=0;
+    
+    count.forEach((freq,char) =>{
+        if(freq > maxCount){
+      maxCount = freq;
+      maxChar = char;
+        }
+    console.log(char,freq);
+    })
+  console.log(`Highest occurred character: '${maxChar}' → ${maxCount} times`);
+}
+
+const chars = 'aaaaabbbccc';
+// countDuplicatesItems(chars);
+/* =========remove given item=====================*/
+function removeGivenChar<T extends string|number>(item:T, toRemove:T): T{
+  const str = item.toString().toLowerCase();
+  const remove = toRemove.toString().toLowerCase();
+  const output = str.split(remove).join('');
+  return(item==='number'?Number(output):output) as T;
+}
+console.log(removeGivenChar('madam','m'));
+
+/*=========reverse specfic words================*/
+function reverseWord<T extends string | number>(item:T, target:T) {
+    const str = item.toString().toLowerCase();
+    const tar = target.toString().toLowerCase();
+    const targetRev = tar.split('').reverse().join('');
+    const output = str.replace(tar,targetRev);
+    console.log(output);
+}
+
+// reverseWord('Anand is from bangalore','bangalore');
+function countDigit(str: string){
+    const digit = str.match(/\d/g);
+    const countDigit = digit?digit.length:0;
+    console.log(countDigit);
+}
+const cityName: string = "456Delhi123";
+countDigit(cityName);
+
+function fetchInteger<T extends string | number>(item:T){
+    const a = "Automation Testing  Record#1234";
+    const output = a.match(/\d+/)[0];
+    console.log(output);
+}
+const nameex = "Automation Testing  Record#1234";
+fetchInteger(nameex);
+
+// const item:[] = {'abc21','cde23','def26'};
+function getSum(){
+    const item:string[] = ['abc21','cde23','def26'];
+    let total:number = 0;
+    for(const str of item){
+        const digit = str.replace(/[a-zA-Z]/g,"");
+        total = total+Number(digit);
+    }
+    console.log(total);
+}
+getSum();
+// Automation Testing  Record#1234
+function getDigit() {
+    const str:string = 'Automation Testing  Record#1234';
+    const digit: string = str.replace(/[a-zA-Z]/g,"");
+    const output:number = Number(digit.replace('#',""));
+    console.log(output);
+}
+getDigit();
+
+function shiftNegativePositiveItems() {
+    const a :number[] = [1,2,-1,3,-2,-3,4];
+    let left:number = 0;
+    let right:number = a.length-1;
+    while(left<right){
+        if(a[left]<0){
+            left++
+        } else if(a[right]>=0){
+            right--;
+        } else{
+            [a[left],a[right]]=[a[right],a[left]];
+            // [a[right],a[left]]=[a[left],a[right]];
+            left++;
+            right--;
+        }
+    }
+    console.log(`Result is ${a}`);
+}
+shiftNegativePositiveItems();
+
+function countDigitChatSpl(){
+    const str : string = 'Bangalore@@1234';
+    const digit = str.match(/[a-zA-Z]/g).join('');
+    console.log(`${digit} and length is ${digit.length}`);
+    const nums = str.match(/[0-9]/g).join('');
+    console.log(`${nums} and length is ${nums.length}`);
+    const spl = str.match(/[^a-zA-Z0-9]/g).join('');
+    console.log(`${spl} and length is ${spl.length}`);
+}
+function func1(){
+   const str: string = "Anand123john123";
+   let sum:number = 0;
+   let matches = str.match(/[0-9]/g);
+      if(matches){
+          for( const d of matches){
+               sum = sum+ Number(d);
+          }
+         
+      }
+   
+   console.log(sum);
+}
+
+func1()

@@ -225,12 +225,12 @@ function countStringChar(str: string) {
 // count first non repeat number
 
 function countNonRepeatNum(arr : number[]): number|null {
-  const count = new Map<number,number>();
+  const counts = new Map<number,number>();
   for(const num of arr){
-    count.set(num, (count.get(num)||0)+1);
+    counts.set(num, (count.get(num)||0)+1);
   }
-  for(const num of arr ){
-    if(count.get(num)===1){
+  for(const [word,count] of counts.entries() ){
+    if(count === 1){
       return num;
     }
   }
@@ -247,8 +247,8 @@ function nonRepeatingGenricMethod<T>(arr:T[]):T|null {
   for(const item of arr){
     count.set(item, (count.get(item)||0)+1);
   }
-  for(const item of arr){
-    if(count.get(item)===1) return item;
+  for(const [word,cnt] of count.entries()){
+    if(cnt ===1) return item;
   }
 
   return null;
